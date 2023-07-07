@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta  name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOTEL REGISTRATION FORM</title>
+    <link href="hotel.css" rel="stylesheet">
+  </head>
+  <body>
+  <form onsubmit="calculateTotalCost()"> 
+    <h1 style="text-align: center; color:white ; background-color: black;">Hotel Booking Registartion </h1>
+    <fieldset>
+      <legend>Customer Info</legend>
+      
+      <label for="name">Customer Name:</label>
+      <input type="text" id="name" name="name" required><br><br>
+      
+      <label for="checkin">Check-in Date:</label>
+      <input type="date" id="checkin" name="checkin" required><br><br>
+      
+      <label for="totaldays">Total No of Days:</label>
+      <input type="number" id="totaldays" name="totaldays" required min="1" onchange="calculateTotalCost()"><br><br>
+      
+      <label for="totalpersons">Total No of Persons:</label>
+      <input type="number" id="totalpersons" name="totalpersons" required min="1" onchange="calculateTotalCost()"><br><br>
+    </fieldset>
+
+    <legend>Room Information</legend>
+      <label><strong>DELUXE ROOM</strong></label>
+      <img src="https://www.thelalit.com/wp-content/uploads/2017/02/Deluxe-Room-Mumbai-768x576.jpg" style="width: 250px; height: 170px; border: 7px solid black;">
+
+
+      <img src="https://www.theparkhotels.com/images/site-specific/chennai/rooms-suites-min.jpg" style="width: 250px; height: 170px; border: 7px solid black;">
+      <strong>SUITE ROOM</strong></label>
+
+      
+      <p></p><label for="roomtype">Room Type:</label>
+      <select id="roomtype" name="roomtype" onchange="calculateTotalCost()">
+        <option value="2500">Deluxe Room</option>
+        <option value="4000">Suite Room</option>
+      </select><br><br>
+      <hr style="width: 1500px;">
+      
+      <label> <strong>Amenities:</strong></label><br>
+      
+      <img src="https://homeauthority.in/wp-content/uploads/2023/03/bedroom-ac-unit.png" style="width: 200px; height: 178px; border: 7px solid black;">
+      <input type="checkbox" name="amenities" value="1000" onchange="calculateTotalCost()"> AC<br>
+      <img src="https://hmhub.in/wp-content/uploads/2017/12/hanoi-first-choice-hotel.jpg" style="width: 200px; height: 178px; border: 7px solid black;">
+      <input type="checkbox" name="amenities" value="300" onchange="calculateTotalCost()"> Locker<br><br>
+    </fieldset>
+
+    
+    <hr>
+    <fieldset>
+      <legend>Room Rates</legend>
+      
+      <p>Deluxe Room: 2500/-</p>
+      <p>Suite Room: 4000/-</p>
+      <p>AC: 1000/-</p>
+      <p>Locker: 300/-</p>
+    </fieldset>
+    
+    <fieldset>
+      <label for="advancePayment">Advance Payment:</label>
+      <input type="number" id="advancePayment" min="0" required type="submit" onchange="calculateTotalCost()" ><br>
+    </fieldset>
+    
+    
+    <fieldset>
+      <legend>Total Cost Calculation</legend> 
+        <p id="roomcost">Room Cost: </p>
+        <p id="amenitiescost">Amenities Cost: </p>
+        <p id="extrapersoncost">Extra Person Cost : </p>
+        <p id="totalcost">Total Cost : </p>
+        <p id="balance">Balance Amount: </p>
+    </fieldset>
+  </form>
+
+  <a href="successful.html" target="_blank"><button>Register</button></a>
+  
+  <script>
+    function calculateTotalCost() {
+    var roomRate = parseInt(document.getElementById('roomtype').value);
+    var amenitiesCost = 0;
+    var amenitiesCheckboxes = document.getElementsByName('amenities');
+    
+    for (var i = 0; i < amenitiesCheckboxes.length; i++) {
+      if (amenitiesCheckboxes[i].checked) {
+        amenitiesCost += parseInt(amenitiesCheckboxes[i].value);
+      }
+    }
+    
+    var totalDays = parseInt(document.getElementById('totaldays').value);
+    var totalPersons = parseInt(document.getElementById('totalpersons').value);
+    var extraPersonCost = 0;
+    
+    if (totalPersons > 2) {
+      extraPersonCost = 1000 * (totalPersons - 2) * totalDays;
+    }
+    
+    var roomCost = roomRate * totalDays;
+    var amenitiesTotalCost = amenitiesCost * totalDays;
+    var totalCost = roomCost + amenitiesTotalCost + extraPersonCost;
+    
+    var advanceAmount = parseInt(document.getElementById('advancePayment').value);
+    
+    document.getElementById('roomcost').textContent = "Room Cost : " + roomCost + "/-";
+    document.getElementById('amenitiescost').textContent = "Amenities Cost: " + amenitiesTotalCost + "/-";
+    document.getElementById('extrapersoncost').textContent = "Extra Person Cost: " + extraPersonCost + "/-";
+    document.getElementById('totalcost').textContent = "Total Cost: " + totalCost + "/-";
+    document.getElementById('balance').textContent = "Balance Amount: "+ (totalCost - advanceAmount) + "/-";
+  };
+  </script>
+</body>
+</html>

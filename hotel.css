@@ -1,0 +1,17 @@
+body{
+    background-image: url(https://img.freepik.com/free-photo/small-hotel-room-interior-with-double-bed-bathroom_1262-12489.jpg);
+    max-width: 100%;
+    background-size: cover;
+    background-blend-mode: lighten;
+    
+}
+p{
+   box-sizing: border-box;
+   border-radius: 10px;
+}
+p{
+    text-align: center;
+}
+label{
+    text-align: center;
+}
